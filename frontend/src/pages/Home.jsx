@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import api from "../api"
 import Note from "../components/Note"
+import "../styles/Home.css"
 
 const Home = () => {
     const [notes,setNotes] = useState([])
@@ -41,8 +42,8 @@ const Home = () => {
         .then((res)=>{
             if (res.status===201) alert('Note Create')
             else alert('Failed to create note')
+            getNotes()
         })
-        getNotes()
         .catch((err)=>{
             console.log("error in createNote",err);
             alert(err)
@@ -51,12 +52,7 @@ const Home = () => {
 
     return (
         <div>
-            <div>
-                <h2>Notes</h2>
-                {notes.map((note)=>{
-                    return <Note key={note.id} note={note} onDelete={deleteNote} />
-                })}
-            </div>
+            
                 <h2>Create a note</h2>
                 <form onSubmit={createNote}>
 
@@ -81,9 +77,16 @@ const Home = () => {
                     <br />
 
                     {/* submit */}
-                    <button type="submit" onClick={createNote}>Submit</button>
+                    <input type="submit" value="Submit"></input>
 
                 </form>
+
+                <div>
+                <h2>Notes</h2>
+                {notes.map((note)=>{
+                    return <Note key={note.id} note={note} onDelete={deleteNote} />
+                })}
+            </div>
         </div>
     )
 }
