@@ -43,6 +43,8 @@ const Home = () => {
             if (res.status===201) alert('Note Create')
             else alert('Failed to create note')
             getNotes()
+            setTitle('')
+            setContent('')
         })
         .catch((err)=>{
             console.log("error in createNote",err);
